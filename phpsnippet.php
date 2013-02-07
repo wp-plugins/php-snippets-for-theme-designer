@@ -28,7 +28,7 @@ function create_snippet_url( $func_name, $id, $slug ) {
     $func_name = esc_html( $func_name );
     $id = esc_html( $id );
     $slug = esc_html( urldecode( $slug ) );
-    $snippetformat = '&lt;?php echo esc_url( %1$s ( \'%2$s\' ) ); // %3$s  ?&gt; ';
+    $snippetformat = '&lt;?php echo esc_url( %1$s ( \'%2$s\' ) ); // %3$s  ?&gt;';
     return sprintf($snippetformat, $func_name, $id, $slug);
 }
 
