@@ -20,6 +20,8 @@ Copy the folder and files into your plugin directoy, and activate it.
 2. Category
 == Changelog ==
 
+= 3.0 =
+support custom post type
 = 2.0 =
 add get_page_link
 = 1.0 =

@@ -3,7 +3,7 @@
 Plugin Name: php snippet for theme designers
 Plugin URI: http://plugin.php-web.net/wp/tema-dezaina-no-tame-no-phpsunipetto
 Description: This plugin diplays a is_page()/is_category()/is_tag() snippet for page/category/tag list. You can go to the page/category/tag list in the admin area, and you can copy one (and paste it to a theme file).
-Version: 2.0
+Version: 3.0
 Author: Fumito Mizuno
 Author URI: http://php-web.net/
 License: GPL ver.2 or later
@@ -38,6 +38,7 @@ function add_snippet_column( $defaults ) {
        return $defaults;
 }
 add_filter('manage_pages_columns', 'add_snippet_column');
+add_filter('manage_posts_columns', 'add_snippet_column');
 function add_categories_snippet_column( $defaults ) {
        $defaults['ifsnippet'] = __('IF') ;
        return $defaults;
@@ -48,16 +49,33 @@ add_filter('manage_edit-post_tag_columns', 'add_categories_snippet_column');
 function add_snippet_text($column_name, $id) {
     if( $column_name == 'ifsnippet' ) {
         $pageinfo = get_page( $id );
-        $output = create_snippet_if( 'is_page', $pageinfo->ID, $pageinfo->post_name );
+		$slug = get_post_type($pageinfo->ID) . ': ' . $pageinfo->post_name;
+        $output = create_snippet_if( 'is_page', $pageinfo->ID, $slug );
         print readonly_textarea( $output );
     } elseif( $column_name == 'linksnippet' ) {
         $pageinfo = get_page( $id );
-        $output = create_snippet_url( 'get_page_link', $pageinfo->ID, $pageinfo->post_name );
+		$slug = get_post_type($pageinfo->ID) . ': ' . $pageinfo->post_name;
+        $output = create_snippet_url( 'get_permalink', $pageinfo->ID, $slug );
         print readonly_textarea( $output );
     }
 
 }
 add_action('manage_pages_custom_column', 'add_snippet_text', 10, 2);
+function add_post_snippet_text($column_name, $id) {
+    if( $column_name == 'ifsnippet' ) {
+        $pageinfo = get_page( $id );
+		$slug = get_post_type($pageinfo->ID) . ': ' . $pageinfo->post_name;
+        $output = create_snippet_if( 'is_single', $pageinfo->ID, $slug );
+        print readonly_textarea( $output );
+    } elseif( $column_name == 'linksnippet' ) {
+        $pageinfo = get_page( $id );
+		$slug = get_post_type($pageinfo->ID) . ': ' . $pageinfo->post_name;
+        $output = create_snippet_url( 'get_permalink', $pageinfo->ID, $slug );
+        print readonly_textarea( $output );
+    }
+
+}
+add_action('manage_posts_custom_column', 'add_post_snippet_text', 10, 2);
 function add_categories_snippet_text($null,$column_name, $id) {
         $cat_name = get_cat_name($id);
         $output = create_snippet_if( 'is_category', $id, $cat_name );

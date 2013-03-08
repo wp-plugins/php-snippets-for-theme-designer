@@ -15,18 +15,18 @@ class PhpSnippetTest extends PHPUnit_Framework_TestCase {
   }
 
   function test_create_snippet_if() {  	
-		$expected = "&lt;?php if ( is_page ( '2' ) ): // sample-page  ?&gt; 
+		$expected = "&lt;?php if ( is_page ( '2' ) ): // page: sample-page  ?&gt; 
 
-&lt;?php endif; // is_page( '2' ) sample-page  ?&gt;";
-		$output = create_snippet_if( 'is_page', '2', 'sample-page' );
+&lt;?php endif; // is_page( '2' ) page: sample-page  ?&gt;";
+		$output = create_snippet_if( 'is_page', '2', 'page: sample-page' );
         $this->assertEquals($expected, $output);
   }
 
   function test_create_snippet_if_escape() {  	
-		$expected = "&lt;?php if ( is_&lt;b&gt;page ( '2&lt;b&gt;' ) ): // sample-&lt;b&gt;page  ?&gt; 
+		$expected = "&lt;?php if ( is_&lt;b&gt;page ( '2&lt;b&gt;' ) ): // page: sample-&lt;b&gt;page  ?&gt; 
 
-&lt;?php endif; // is_&lt;b&gt;page( '2&lt;b&gt;' ) sample-&lt;b&gt;page  ?&gt;";
-		$output = create_snippet_if( 'is_<b>page', '2<b>', 'sample-<b>page' );
+&lt;?php endif; // is_&lt;b&gt;page( '2&lt;b&gt;' ) page: sample-&lt;b&gt;page  ?&gt;";
+		$output = create_snippet_if( 'is_<b>page', '2<b>', 'page: sample-<b>page' );
         $this->assertEquals($expected, $output);
   }
 
