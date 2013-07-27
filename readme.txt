@@ -3,7 +3,7 @@ Contributors: ounziw
 Donate link: http://pledgie.com/campaigns/8706
 Tags: category, admin, dashboard, php
 Requires at least: 3.1
-Tested up to: 3.5.1
+Tested up to: 3.5.2
 Stable tag: trunk
 
 PHP Snippets for Theme Designer
@@ -20,6 +20,8 @@ Copy the folder and files into your plugin directoy, and activate it.
 2. Category
 == Changelog ==
 
+= 3.1 =
+add category/tag link
 = 3.0 =
 support custom post type
 = 2.0 =

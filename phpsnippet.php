@@ -3,7 +3,7 @@
 Plugin Name: php snippet for theme designers
 Plugin URI: http://plugin.php-web.net/wp/tema-dezaina-no-tame-no-phpsunipetto
 Description: This plugin diplays a is_page()/is_category()/is_tag() snippet for page/category/tag list. You can go to the page/category/tag list in the admin area, and you can copy one (and paste it to a theme file).
-Version: 3.0
+Version: 3.1
 Author: Fumito Mizuno
 Author URI: http://php-web.net/
 License: GPL ver.2 or later
@@ -41,6 +41,7 @@ add_filter('manage_pages_columns', 'add_snippet_column');
 add_filter('manage_posts_columns', 'add_snippet_column');
 function add_categories_snippet_column( $defaults ) {
        $defaults['ifsnippet'] = __('IF') ;
+       $defaults['linksnippet'] = __('LINK') ;
        return $defaults;
 }
 add_filter('manage_edit-category_columns', 'add_categories_snippet_column');
@@ -77,14 +78,26 @@ function add_post_snippet_text($column_name, $id) {
 }
 add_action('manage_posts_custom_column', 'add_post_snippet_text', 10, 2);
 function add_categories_snippet_text($null,$column_name, $id) {
+    if( $column_name == 'ifsnippet' ) {
         $cat_name = get_cat_name($id);
         $output = create_snippet_if( 'is_category', $id, $cat_name );
         return readonly_textarea($output);
+    } elseif( $column_name == 'linksnippet' ) {
+        $cat_name = get_cat_name($id);
+        $output = create_snippet_url( 'get_category_link', $id, $cat_name );
+        print readonly_textarea( $output );
+    }
 }
 add_filter('manage_category_custom_column', 'add_categories_snippet_text', 10, 3);
 function add_post_tag_snippet_text($null,$column_name, $id) {
+    if( $column_name == 'ifsnippet' ) {
         $tag_array = get_term_by('id',$id,'post_tag');
         $output = create_snippet_if( 'is_tag', $id, $tag_array->name );
         return readonly_textarea($output);
+    } elseif( $column_name == 'linksnippet' ) {
+        $tag_array = get_term_by('id',$id,'post_tag');
+        $output = create_snippet_url( 'get_tag_link', $id, $tag_array->name );
+        print readonly_textarea( $output );
+    }
 }
 add_filter('manage_post_tag_custom_column', 'add_post_tag_snippet_text', 10, 3);
