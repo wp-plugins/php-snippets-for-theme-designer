@@ -58,10 +58,10 @@ abstract class psftd_file {
 
 class psftd_get_js extends psftd_file {
     protected $file_extension = 'js';
-    protected $format = "wp_enqueue_script( '%s', \$dir.'%s', array('') );\n";
+    protected $format = "wp_enqueue_script( '%s', \$dir.'%s', array() );\n";
 }
 
 class psftd_get_css extends psftd_file {
     protected $file_extension = 'css';
-    protected $format = "wp_enqueue_style( '%s', \$dir.'%s', array('') );\n";
+    protected $format = "wp_enqueue_style( '%s', \$dir.'%s', array() );\n";
 }
