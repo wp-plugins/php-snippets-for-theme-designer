@@ -32,7 +32,7 @@ abstract class psftd_file {
                 //$file_basename = $object->getBasename( '.' . $this->file_extension );
                 $fullpath = $object->getPathname();
                 $relativepath = str_replace($this->dir, '', $fullpath);
-                $filename = str_replace('/', '-', $relativepath);
+                $filename = str_replace('/', '-', ltrim($relativepath,'/'));
                 $this->filelist[$filename] = $relativepath;
             }
         }
