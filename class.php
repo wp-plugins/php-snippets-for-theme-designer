@@ -29,10 +29,11 @@ abstract class psftd_file {
 
         foreach($objects as $name => $object){
             if ( $object->getExtension() == $this->file_extension ) {
-                $file_basename = $object->getBasename( '.' . $this->file_extension );
+                //$file_basename = $object->getBasename( '.' . $this->file_extension );
                 $fullpath = $object->getPathname();
                 $relativepath = str_replace($this->dir, '', $fullpath);
-                $this->filelist[$file_basename] = $relativepath;
+                $filename = str_replace('/', '-', $relativepath);
+                $this->filelist[$filename] = $relativepath;
             }
         }
     }

@@ -3,7 +3,7 @@ Contributors: ounziw
 Donate link: http://pledgie.com/campaigns/8706
 Tags: category, admin, dashboard, php
 Requires at least: 3.7
-Tested up to: 3.9.1
+Tested up to: 3.9.2
 Stable tag: trunk
 
 PHP Snippets for Theme Designer
@@ -20,6 +20,8 @@ Copy the folder and files into your plugin directoy, and activate it.
 2. Category
 == Changelog ==
 
+= 4.1 =
+fixed bug. (same name on different folder)
 = 4.0 =
 add wp_enqueue_script / wp_enqueue_style snippet
 = 3.2 =

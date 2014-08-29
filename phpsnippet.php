@@ -3,7 +3,7 @@
 Plugin Name: php snippet for theme designers
 Plugin URI: http://plugin.php-web.net/wp/tema-dezaina-no-tame-no-phpsunipetto
 Description: This plugin diplays a is_page()/is_category()/is_tag() snippet for page/category/tag list. You can go to the page/category/tag list in the admin area, and you can copy one (and paste it to a theme file).
-Version: 4.0
+Version: 4.1
 Author: Fumito Mizuno
 Author URI: http://php-web.net/
 License: GPL ver.2 or later
