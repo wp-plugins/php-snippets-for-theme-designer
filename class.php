@@ -49,20 +49,32 @@ abstract class psftd_file {
     }
     
     function dir_output() {
-        return "\$dir = $this->url_func ;\n";
+        return "  \$dir = $this->url_func ;\n";
     }
     function output() {
         return $this->output;
+    }
+    function create_func_name() {
+        return get_stylesheet() .'_add_'. $this->file_extension;
+    }
+    function wrap_func() {
+        $wrap = sprintf('add_action( "wp_enqueue_scripts", "%1$s");
+function %1$s() {
+', $this->create_func_name());
+        $wrap .= $this->dir_output();
+        $wrap .= $this->output();
+        $wrap .= '}';
+        return $wrap;
     }
 
 }
 
 class psftd_get_js extends psftd_file {
     protected $file_extension = 'js';
-    protected $format = "wp_enqueue_script( '%s', \$dir.'%s', array() );\n";
+    protected $format = "  wp_enqueue_script( '%s', \$dir.'%s', array() );\n";
 }
 
 class psftd_get_css extends psftd_file {
     protected $file_extension = 'css';
-    protected $format = "wp_enqueue_style( '%s', \$dir.'%s', array() );\n";
+    protected $format = "  wp_enqueue_style( '%s', \$dir.'%s', array() );\n";
 }
